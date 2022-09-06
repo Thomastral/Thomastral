@@ -1,0 +1,10 @@
+---- **Perso**
+---- bin
+---- etc
+---- lib
+---- lib64
+---- media
+---- **public_html**
+---- sbin
+---- usr
+---- var
