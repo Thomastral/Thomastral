@@ -1,8 +1,19 @@
 /*
-Nom : Paillard
-Prénom : Thomas
-Utilité programme : calcul d'IMC, calcul du carré d'une valeur choisie, comparateur de 2 valeurs, fonction d'échange de deux valeurs décimales, compteur a limite définissable
+Nom : 
+Paillard
+
+Prénom : 
+Thomas
+
+Utilité programme : 
+Calcul d'IMC
+Calcul du carré d'une valeur choisie
+Comparateur de 2 valeurs
+Fonction d'échange de deux valeurs décimales
+Compteur a limite définissable
+Verification pair/impair
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -118,30 +129,28 @@ void IMC()
     
     printf("Votre age : ");
     scanf("%d", &age);
+    printf("\n");
     
     IMC=poids/(taille*taille);
     
     if (valeursexe==0)
     {
-        
         printf("Bonjour, vous êtes un homme, vous avez %d ans vous pesez %f Kg,vous mesurez %f cm et votre IMC est de %f", age, poids, taille*100, IMC);
-        printf("\n");
-    
-        
+        printf("\n");           
     }
     else
-        {
-        
+        {        
             printf("Bonjour, vous êtes une femme, vous avez %d ans vous pesez %f Kg,vous mesurez %f cm et votre IMC est de %f \n", age, poids, taille*100, IMC);
-            printf("\n");
-    
-            
-        }
-        
-    printf("\n");
-       
+            printf("\n");       
+        }        
+    printf("\n");       
 }
 
+//fonction verif pair/impair
+int verifpairimpair(int m)
+{    
+    return (m%2);
+}
 
 //fonction main
 int main()
@@ -178,7 +187,20 @@ int main()
     int nombre1 = 4;
     int nombre2 = 5;
     echange(nombre1, nombre2);
+    printf("\n");
     
+    //partie fonction verif pair/impair
+    int m=0;    
+    printf("Valeur à verifier : ");
+    scanf("%d", &m);
+    printf("\n");
+    int resultatverifpair=verifpairimpair(m);    
+    if(resultatverifpair==0)
+        printf("%d est une nombre pair\n", m);          
+      else
+        printf("%d est un nombre impair\n", m);
+    
+    printf("\n");
     printf("Fin du programme \n");
     
     return 0;
