@@ -7,13 +7,15 @@ Utilité programme :
 3/ Comparateur de 2 valeurs
 4/ Fonction d'échange de deux valeurs décimales
 5/ Compteur a limite définissable
-6/ Verification pair/impair
+6/ Verification d'une donnée : pair/impair
 7/ Comparateur de 3 valeurs
 8/ Addition de pommes et poires
 9/ Addition de deux valeurs choisies
-10/ Calcul de surface
+10/ Calcul de surface d'un rectangle
 11/ Temps de charge de la Tesla
 12/ Vitesse d'un pieton en m/s
+13/hello world en c
+14/Moyenne de 5 valeurs chosies
 */
 
 #include <stdio.h>
