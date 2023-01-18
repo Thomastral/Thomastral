@@ -1,22 +1,72 @@
-#ifndef WOLF_H
-#define WOLF_H
+#include "WolfAdv.h"
+#include <iostream>
+using namespace std;
 
-class Wolf 
+//constructeur
+Wolf::Wolf() 
 {
-  private:
-    int weight;
-    int teeth;
-    int hunger;
-    int stamina;
-    int distancetraveled;
+	distancetraveled = 0;
+    weight = 74;
+    teeth = 42;
+    hunger = 50;
+    stamina = 50;
+}
 
-  public:
-	Wolf();
-    void walk();
-    void eat();
-    void check();
-    void status();
-    ~Wolf();
-};
+void Wolf::ChooseWN()
+{
+	printf("*************************************************************** \n");
+	printf("Please enter a name for your Wolf \n");
+	scanf("%s", &WolfName);
+}
 
-#endif
+void Wolf::walk() 
+{
+	distancetraveled++;
+    stamina--;
+    hunger++;
+    printf("*************************************************************** \n");
+    printf("Le %s a parcouru 1km \n", WolfName);
+}
+
+void Wolf::eat() 
+{
+    weight++;
+    hunger--;
+    teeth--;
+    printf("*************************************************************** \n");
+    printf("Le %s a devore une proie, malheureusement il a perdu une dent \n", WolfName);
+}
+
+void Wolf::check() 
+{
+    if (hunger >= 100) 
+    {
+        weight--;
+        printf("*************************************************************** \n");
+        printf("Le %s a faim, il doit manger \n", WolfName);
+    }
+    
+    if (stamina <= 0) 
+    {
+        teeth--;
+        printf("*************************************************************** \n");
+        printf("Le %s est fatigué, il doit manger \n", WolfName);
+    }
+}
+
+void Wolf::status() 
+{
+	printf("*************************************************************** \n");
+	printf("%s's status :\n", WolfName);
+    cout <<"Weight : "<< weight <<" kg"<<endl;
+    cout <<"Teeth : "<< teeth <<endl;
+    cout <<"Hunger : "<< hunger <<" %"<<endl;
+    cout <<"Stamina : "<< stamina <<" %"<<endl;
+    cout <<"Total distance traveled : "<< distancetraveled <<" km"<<endl;
+}
+
+//destructeur
+Wolf::~Wolf()
+{
+	
+}
