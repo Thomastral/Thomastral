@@ -12,13 +12,20 @@ Wolf::Wolf()
     stamina = 50;
 }
 
+void Wolf::ChooseWN()
+{
+	printf("*************************************************************** \n");
+	printf("Please enter a name for your Wolf \n");
+	scanf("%s", &WolfName);
+}
+
 void Wolf::walk() 
 {
 	distancetraveled++;
     stamina--;
     hunger++;
     printf("*************************************************************** \n");
-    printf("Le loup a parcouru 1km \n");
+    printf("Le %s a parcouru 1km \n", WolfName);
 }
 
 void Wolf::eat() 
@@ -27,7 +34,7 @@ void Wolf::eat()
     hunger--;
     teeth--;
     printf("*************************************************************** \n");
-    printf("Le loup a devore une proie, mamheureusement il a perdu une dent \n");
+    printf("Le %s a devore une proie, malheureusement il a perdu une dent \n", WolfName);
 }
 
 void Wolf::check() 
@@ -36,20 +43,21 @@ void Wolf::check()
     {
         weight--;
         printf("*************************************************************** \n");
-        printf("Le loup a faim, il doit manger \n");
+        printf("Le %s a faim, il doit manger \n", WolfName);
     }
     
     if (stamina <= 0) 
     {
         teeth--;
         printf("*************************************************************** \n");
-        printf("Le loup est fatigué, il doit manger \n");
+        printf("Le %s est fatigué, il doit manger \n", WolfName);
     }
 }
 
 void Wolf::status() 
 {
 	printf("*************************************************************** \n");
+	printf("%s's status :\n", WolfName);
     cout <<"Weight : "<< weight <<" kg"<<endl;
     cout <<"Teeth : "<< teeth <<endl;
     cout <<"Hunger : "<< hunger <<" %"<<endl;
