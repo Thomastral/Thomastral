@@ -25,7 +25,7 @@ void Wolf::walk()
     stamina--;
     hunger++;
     printf("*************************************************************** \n");
-    printf("Le %s a parcouru 1km \n", WolfName);
+    printf("%s have traveled 1km \n", WolfName);
 }
 
 void Wolf::eat() 
@@ -34,7 +34,7 @@ void Wolf::eat()
     hunger--;
     teeth--;
     printf("*************************************************************** \n");
-    printf("Le %s a devore une proie, malheureusement il a perdu une dent \n", WolfName);
+    printf("%s have eat a rabbit but he lost a teeth \n", WolfName);
 }
 
 void Wolf::check() 
@@ -50,7 +50,7 @@ void Wolf::check()
     {
         teeth--;
         printf("*************************************************************** \n");
-        printf("Le %s est fatigué, il doit manger \n", WolfName);
+        printf("%s is hungry, he need to eat \n", WolfName);
     }
 }
 
