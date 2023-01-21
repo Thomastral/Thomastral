@@ -1,3 +1,8 @@
+/*
+Program by : Thomas Paillard
+Wolf Game
+fonctions
+*/
 #include "WolfAdv.h"
 #include <iostream>
 using namespace std;
