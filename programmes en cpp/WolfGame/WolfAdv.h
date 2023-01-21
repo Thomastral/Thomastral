@@ -1,3 +1,8 @@
+/*
+Program by : Thomas Paillard
+Wolf Game
+.h file
+*/
 #ifndef WOLF_H
 #define WOLF_H
 
