@@ -22,9 +22,9 @@ class Wolf
 	void event();
     void walk();
     void eat();
-    void check();
     void status();
     ~Wolf();
 };
 
 #endif
+
