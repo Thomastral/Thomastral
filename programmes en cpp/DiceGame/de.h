@@ -9,13 +9,12 @@ Dice Game
 class Dice
 {
   private:
-    int A;
-    int B;
+    int valeur;
 
   public:
 	Dice();
-	void X();
-	void Y();
+	int throw();
+	int get_value();
     ~Dice();
 };
 
