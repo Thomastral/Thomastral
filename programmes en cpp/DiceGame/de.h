@@ -11,9 +11,12 @@ class Dice
   private:
     int value;
     int round;
+    int FaceNbr;
 
   public:
 	Dice();
+	Dice(int FaceNumber);
+	void ChooseFnbr();
 	int roll();
 	int get_value();
     ~Dice();
