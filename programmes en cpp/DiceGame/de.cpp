@@ -12,18 +12,24 @@ using namespace std;
 //constructeur
 Dice::Dice() 
 {
-	A = 1;
-    B = 2;
+	srand (time(NULL));
+
+	  /* genere un nombre entre valeur2 et valeur1 */
+	  value = rand() % 6 + 1;
 }
 
-void Dice::X()
+int Dice::roll()
 {
+	value = rand() % 6 + 1;
 	
+	return value;
 }
 
-void Dice::Y()
+int Dice::get_value()
 {
+	//printf("get_value fonctionne");
 	
+	return value;
 }
 
 //destructeur
