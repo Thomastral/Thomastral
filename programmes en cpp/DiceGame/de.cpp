@@ -18,6 +18,17 @@ Dice::Dice()
 	  value = rand() % 6 + 1;
 }
 
+Dice::Dice(int FaceNumber)
+{
+	int FaceNbr=1;
+} 
+
+void Dice::ChooseFnbr()
+{
+	printf("\e[6;37;1m-Choose the number of face for your new dice-\e[0m\n");
+	scanf("%d", &FaceNbr);
+}
+
 int Dice::roll()
 {
 	value = rand() % 6 + 1;
@@ -37,3 +48,4 @@ Dice::~Dice()
 {
 	
 }
+
