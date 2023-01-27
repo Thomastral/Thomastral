@@ -1,7 +1,7 @@
 /*
 Program by : Thomas Paillard
 Dice Game
-* .h file
+.h file
 */
 #ifndef DICE_H
 #define DICE_H
@@ -9,13 +9,13 @@ Dice Game
 class Dice
 {
   private:
-    int valeur;
+    int value;
+    int round;
 
   public:
 	Dice();
-	int throw();
+	int roll();
 	int get_value();
     ~Dice();
 };
-
 #endif
