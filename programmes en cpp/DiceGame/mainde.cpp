@@ -14,9 +14,11 @@ int main()
     Dice dice;
     int guess;
     
-    cout << "Dice's face before the roll : " << dice.get_value() << endl;
+    cout << "\e[37;1mDice's face \e[32;1mbefore\e[0m the roll :\e[0m " << dice.get_value() << endl;
         
-    cout << "Dice's face after the roll : " << dice.roll() << endl;
+    cout << "\e[37;1mDice's face \e[36;1mafter\e[0m the roll :\e[0m " << dice.roll() << endl;
+    
+    dice.ChooseFnbr();
     
     return 0;
 }
