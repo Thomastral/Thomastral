@@ -19,6 +19,7 @@ Joueur::Joueur(string pse, De* de_1, De* de_2)
 	de2 = de_2;
 }
 
+//\e[6;37;1m texte \e[0m  pour texte blanc en gras clignotant
 
 string Joueur::get_pseudo()
 {
@@ -36,10 +37,12 @@ void Joueur::jouer()
 	de2->lancer();
 	
 	if (de1->get_valeur() == 6)
-		point = point + 1;
+		point = ++point;
 	
 	if (de2->get_valeur() == 6)
-		point = point + 1;
+		point = ++point;
+		
+	
 	
 }
 
