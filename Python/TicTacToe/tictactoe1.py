@@ -1,95 +1,109 @@
 import pygame
-import sys
 
 # Initialisation de Pygame
 pygame.init()
 
-# Définition de la fenêtre de jeu
-size = (300, 300)
-screen = pygame.display.set_mode(size)
+# Variables globales
+TAILLE_FENETRE = 800
+GRIS = (200, 200, 200)
+BLANC = (255, 255, 255)
+ROUGE = (255, 0, 0)
+COULEUR_TEXTE = (255, 255, 255)  # Blanc
+joueur1 = 'X'
+joueur2 = 'O'
+tour = joueur1
+tableau = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+jeu_fini = False
+gagnant = None
+
+# Création de la fenêtre de jeu
+fenetre = pygame.display.set_mode((TAILLE_FENETRE, TAILLE_FENETRE + 50))
 pygame.display.set_caption("Tic Tac Toe")
 
-# Couleurs
-black = (0, 0, 0)
-white = (255, 255, 255)
+# Fonctions
+def afficher_tableau():
+    font = pygame.font.SysFont(None, 100)
+    for i in range(3):
+        for j in range(3):
+            case = tableau[i*3 + j]
+            texte = font.render(case, True, BLANC)
+            x = j * (TAILLE_FENETRE // 3) + (TAILLE_FENETRE // 6)
+            y = i * (TAILLE_FENETRE // 3) + (TAILLE_FENETRE // 6)
+            texte_rect = texte.get_rect(center=(x, y))
+            fenetre.blit(texte, texte_rect)
 
-# Variables pour la grille et les pièces
-grid = [["", "", ""],
-        ["", "", ""],
-        ["", "", ""]]
-player = "X"
-winner = None
-draw = False
+def placer_symbole(case):
+    global tour
+    global tableau
+    global jeu_fini
+    global gagnant
+    if tableau[case] == ' ':
+        tableau[case] = tour
+        if est_gagnant(tour):
+            gagnant = tour
+            jeu_fini = True
+        elif est_match_nul():
+            jeu_fini = True
+        else:
+            if tour == joueur1:
+                tour = joueur2
+            else:
+                tour = joueur1
+    else:
+        print("Cette case est déjà occupée. Choisissez une autre case.")
 
-# Fonction pour dessiner la grille
-def draw_grid():
-    for x in range(1, 3):
-        pygame.draw.line(screen, black, (0, x * 100), (300, x * 100), 2)
-        pygame.draw.line(screen, black, (x * 100, 0), (x * 100, 300), 2)
+def est_gagnant(joueur):
+    for i in range(3):
+        # Vérifier les lignes
+        if tableau[i*3] == joueur and tableau[i*3+1] == joueur and tableau[i*3+2] == joueur:
+            return True
+        # Vérifier les colonnes
+        if tableau[i] == joueur and tableau[i+3] == joueur and tableau[i+6] == joueur:
+            return True
+    # Vérifier les diagonales
+    if tableau[0] == joueur and tableau[4] == joueur and tableau[8] == joueur:
+        return True
+    if tableau[2] == joueur and tableau[4] == joueur and tableau[6] == joueur:
+        return True
+    return False
 
-# Fonction pour dessiner les pièces
-def draw_pieces():
-    global grid
-    for row in range(3):
-        for col in range(3):
-            if grid[row][col] == "X":
-                pygame.draw.line(screen, black, (col * 100 + 15, row * 100 + 15), (col * 100 + 85, row * 100 + 85), 2)
-                pygame.draw.line(screen, black, (col * 100 + 85, row * 100 + 15), (col * 100 + 15, row * 100 + 85), 2)
-            elif grid[row][col] == "O":
-                pygame.draw.circle(screen, black, (col * 100 + 50, row * 100 + 50), 35, 2)
-
-# Fonction pour vérifier si le jeu est terminé
-def check_game_over():
-    global grid, winner, draw
-    for row in range(3):
-        if (grid[row][0] == grid[row][1] == grid[row][2]) and grid[row][0] != "":
-            winner = grid[row][0]
-            pygame.draw.line(screen, white, (0, row * 100 + 50), (300, row * 100 + 50), 2)
-            break
-    for col in range(3):
-        if (grid[0][col] == grid[1][col] == grid[2][col]) and grid[0][col] != "":
-            winner = grid[0][col]
-            pygame.draw.line(screen, white, (col * 100 + 50, 0), (col * 100 + 50, 300), 2)
-            break
-    if (grid[0][0] == grid[1][1] == grid[2][2]) and grid[0][0] != "":
-        winner = grid[0][0]
-        pygame.draw.line(screen, white, (50, 50), (250, 250), 2)
-    elif (grid[0][2] == grid[1][1] == grid[2][0]) and grid[0][2] != "":
-        winner = grid[0][2]
-        pygame.draw.line(screen, white, (250, 50), (50, 250), 2)
-    elif all(all(row) for row in grid):
-        draw = True
-
-# Fonction pour afficher le texte à la fin du jeu
-def show_game_over_text():
-    font = pygame.font
-    if winner:
-        text = font.render(f"{winner} a gagné !", True, white)
-    elif draw:
-        text = font.render("Match nul !", True, white)
-    screen.blit(text, (80, 280))
-
-# Boucle principale
-while True:
+def est_match_nul():
+    if ' ' not in tableau:
+        return True
+    else:
+        return False
+    
+def afficher_message_fin():
+    font = pygame.font.Font(None, TAILLE_FENETRE // 6)
+    if gagnant == 'X':
+        message = "Le joueur X a gagné !"
+    elif gagnant == 'O':
+        message = "Le joueur O a gagné !"
+    else:
+        message = "Match nul !"
+    texte = font.render(message, True, COULEUR_TEXTE)
+    rect = texte.get_rect(center=(TAILLE_FENETRE // 2, TAILLE_FENETRE // 2))
+    fenetre.blit(texte, rect)
+    
+# Boucle de jeu
+continuer = True
+while continuer:
+    # Gestion des événements
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == pygame.MOUSEBUTTONDOWN and not winner and not draw:
+            continuer = False
+        elif event.type == pygame.MOUSEBUTTONDOWN and not jeu_fini:
             x, y = pygame.mouse.get_pos()
-            row, col = y // 100, x // 100
-            if grid[row][col] == "":
-                grid[row][col] = player
-                if player == "X":
-                    player = "O"
-                else:
-                    player = "X"
-
-    screen.fill(white)
-    draw_grid()
-    draw_pieces()
-    check_game_over()
-    if winner or draw:
-        show_game_over_text()
-
+            colonne = x // (TAILLE_FENETRE // 3)
+            ligne = y // (TAILLE_FENETRE // 3)
+            case = ligne * 3 + colonne
+            placer_symbole(case)
+            afficher_tableau()
+            if jeu_fini:
+                afficher_message_fin()
+    
+    # Actualisation de l'écran
     pygame.display.update()
+
+# Fermeture de Pygame
+pygame.quit()
