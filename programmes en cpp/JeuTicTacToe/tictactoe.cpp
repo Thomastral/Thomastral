@@ -31,7 +31,7 @@ void tour_de_jeu()
 {
     char choix;
     int ligne, colonne;
-    cout << "\e[37mC'est le tour du joueur \e[31;1m" << joueur << "\e[0m\e[37m. \nEntrez un nombre pour choisir votre case : \e[0m";
+    cout << "\e[37mC'est le tour du joueur \e[31;1m" << joueur << "\e[0m\e[37m. \n\nEntrez un nombre pour choisir votre case : \e[0m";
     cin >> choix;
     printf("\n");
     
@@ -194,17 +194,7 @@ void jouer()
 
 int main() 
 {
-	
-	//int rejouer = 1;
-	
-	//while(rejouer == 1)
-	//{
-		jouer();
+	jouer();
 		
-		////option rejouer
-		//printf("\n\e[37mSouhaitez vous continuer a jouer ?\n\n");
-		//printf("\e[5;37mEntrez 1 pour continuer ou 0 pour quitter le jeu\e[0m\n");
-		//scanf("%d", &rejouer);
-	//}
 	return 0;
 }
