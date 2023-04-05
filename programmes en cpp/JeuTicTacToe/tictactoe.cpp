@@ -153,7 +153,7 @@ void jouer()
 		if (verifier_victoire()) 
 		{
 			dessiner_tableau();
-			cout << "\e[37mLe joueur\e[0m \e[31;1m" << joueur << " \e[0m\e[37ma gagné !\e[0m\n";
+			cout << "\e[37mLe joueur\e[0m \e[31;1m" << joueur << " \e[0m\e[37ma perdu !\e[0m\n";
 			partie_terminee = true;
 		} else if (verifier_match_nul()) 
 		
