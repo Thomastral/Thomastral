@@ -46,6 +46,10 @@ bateaux_joueur = {"Porte-avion": 5, "Croiseur": 4, "Contre-torpilleur": 3, "Sous
 for bateau in bateaux_joueur:
     placement_valide = False
     while not placement_valide:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
         fenetre.fill(BLANC)
         message_titre = police_titre.render("Placement des bateaux", True, NOIR)
         fenetre.blit(message_titre, [largeur_fenetre/2 - message_titre.get_width()/2, 50])
@@ -59,88 +63,14 @@ for bateau in bateaux_joueur:
         message_aide = police_bouton.render("Cliquez sur les cases pour placer le bateau. Utilisez les flèches pour changer l'orientation.", True, NOIR)
         fenetre.blit(message_aide, [marge, 550])
         pygame.display.update()
+
+        # Vérification du placement du bateau
         for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-        continuer_jeu = False
-    elif event.type == pygame.MOUSEBUTTONDOWN and not partie_terminee:
-        x, y = event.pos
-        colonne = x // (TAILLE_CELLULE + ESPACE_CELLULE)
-        ligne = y // (TAILLE_CELLULE + ESPACE_CELLULE)
-
-        if grille_joueur[ligne][colonne] == 0:
-            grille_joueur[ligne][colonne] = 2  # Marquer la case jouée
-            if grille_adversaire[ligne][colonne] == 1:
-                # Le joueur a touché un navire
-                grille_adversaire[ligne][colonne] = 3  # Marquer la case touchée
-                if est_navire_coule(grille_adversaire, ligne, colonne):
-                    navire_coule = True
-                    print("Vous avez coulé un navire !")
-                    nb_navires_coules += 1
-                    if nb_navires_coules == NB_NAVIRES:
-                        print("Bravo, vous avez gagné la partie !")
-                        partie_terminee = True
-            else:
-                # Le joueur a tiré dans l'eau
-                grille_adversaire[ligne][colonne] = 2  # Marquer la case jouée
-                tour_joueur = False
-    elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and partie_terminee:
-        grille_joueur = initialiser_grille()
-        grille_adversaire = initialiser_grille()
-        nb_navires_coules = 0
-        tour_joueur = True
-        navire_coule = False
-        partie_terminee = False
-
-       # Dessiner la grille de jeu
-    dessiner_grille(fenetre, grille_joueur, True)
-    dessiner_grille(fenetre, grille_adversaire, False)
-
-    # Afficher les bateaux du joueur
-    afficher_bateaux(fenetre, bateaux_joueur)
-
-    # Vérifier si un bateau est touché
-    for evenement in pygame.event.get():
-        if evenement.type == pygame.MOUSEBUTTONDOWN and evenement.button == 1:
-            x, y = evenement.pos
-            if x >= MARGE_GAUCHE and x < MARGE_GAUCHE + TAILLE_CASE * NB_COLONNES \
-                    and y >= MARGE_HAUT and y < MARGE_HAUT + TAILLE_CASE * NB_LIGNES:
-                colonne = (x - MARGE_GAUCHE) // TAILLE_CASE
-                ligne = (y - MARGE_HAUT) // TAILLE_CASE
-                if grille_adversaire[ligne][colonne] == VIDE:
-                    grille_adversaire[ligne][colonne] = RATE
-                    joueur_courant = (joueur_courant + 1) % 2
-                    message = "C'est au joueur {} de jouer".format(joueur_courant + 1)
-                elif grille_adversaire[ligne][colonne] == BATEAU:
-                    grille_adversaire[ligne][colonne] = TOUCHE
-                    bateau_touche = False
-                    for bateau in bateaux_adversaire:
-                        if (ligne, colonne) in bateau:
-                            bateau_touche = True
-                            bateau.remove((ligne, colonne))
-                            if len(bateau) == 0:
-                                bateaux_adversaire.remove(bateau)
-                                message = "Le joueur {} a coulé un bateau !".format(joueur_courant + 1)
-                            else:
-                                message = "Le joueur {} a touché un bateau !".format(joueur_courant + 1)
-                            break
-                    if not bateau_touche:
-                        message = "Le joueur {} a déjà touché cette case !".format(joueur_courant + 1)
-                else:
-                    message = "Le joueur {} a déjà touché cette case !".format(joueur_courant + 1)
-
-    # Vérifier si la partie est terminée
-    if len(bateaux_joueur) == 0:
-        message = "Le joueur 2 a gagné !"
-        partie_terminee = True
-    elif len(bateaux_adversaire) == 0:
-        message = "Le joueur 1 a gagné !"
-        partie_terminee = True
-
-    # Afficher le message de statut
-    afficher_message(fenetre, message)
-
-    # Actualiser l'affichage
-    pygame.display.flip()
-
-# Quitter Pygame
-pygame.quit()
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                x, y = event.pos
+                colonne = (x - marge) // taille_case
+                ligne = (y - 200) // taille_case
+                if
