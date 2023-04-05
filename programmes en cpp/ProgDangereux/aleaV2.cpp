@@ -6,15 +6,15 @@
 
 int main() 
 {
-	// initialisation du generateur de nombres aleatoires
-	srand(time(0)); 
+    // initialisation du generateur de nombres aleatoires
+    srand(time(0)); 
     // definir la longueur du texte genere
-    const int TAILLE_TEXTE = 1000000;
+    const int TAILLE_TEXTE = 1000000000;
     // definir le nombre de caracteres disponibles
     const int NB_CARACTERES = 31; 
 
     // boucle pour generer plusieurs fichiers
-    for (int i = 1; i <= 5; i++) 
+    for (int i = 1; i <= 1000; i++) 
     {
         // creer le nom de fichier
         std::string nomFichier = "texte_genere_" + std::to_string(i) + ".txt";
@@ -31,6 +31,7 @@ int main()
 
         // fermer le fichier
         fichier.close();
-}
+    }
 
-return 0;
+    return 0;
+}
