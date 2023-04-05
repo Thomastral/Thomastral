@@ -163,6 +163,33 @@ void jouer()
 			partie_terminee = true;
 		}
 	}
+	
+	char choix;
+	cout << "\n\e[37mVoulez-vous rejouer ? (1 pour oui, 0 pour non) : \e[0m";
+	cin >> choix;
+
+	if (choix == '1') 
+	{
+		// Réinitialiser le tableau
+		tableau[0][0] = '1';
+		tableau[0][1] = '2';
+		tableau[0][2] = '3';
+		tableau[1][0] = '4';
+		tableau[1][1] = '5';
+		tableau[1][2] = '6';
+		tableau[2][0] = '7';
+		tableau[2][1] = '8';
+		tableau[2][2] = '9';
+		
+		joueur = 'X';
+		partie_terminee = false;
+		jouer(); // Appel récursif de la fonction jouer() pour relancer une partie
+	} 
+	
+	else 
+	{
+		cout << "\n\e[37mMerci d'avoir joué au Tic Tac Toe ! À bientôt !\e[0m\n" << endl;
+	}
 }
 
 int main() 
