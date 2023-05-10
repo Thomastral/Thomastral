@@ -40,7 +40,7 @@ void tour_de_jeu()
     cin >> choix;
     printf("\n");
     
-    // CHoix de la case 
+    // Choix de la case 
     switch (choix) 
     {
         case '1':
@@ -118,28 +118,28 @@ bool verifier_victoire()
 {
     for (int i = 0; i < 3; i++) 
     {
-        if (tableau[i][0] == tableau[i][1] && tableau[i][1] == tableau[i][2]) 
+        if (tableau[i][0] == tableau[i][1] && tableau[i][1] == tableau[i][2] && tableau[i][0] != ' ') 
         {
             return true;
         }
         
-        if (tableau[0][i] == tableau[1][i] && tableau[1][i] == tableau[2][i]) 
+        if (tableau[0][i] == tableau[1][i] && tableau[1][i] == tableau[2][i] && tableau[0][i] != ' ') 
         {
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 
-	if (tableau[0][0] == tableau[1][1] && tableau[1][1] == tableau[2][2]) 
-	{
-		return true;
-	}
+    if (tableau[0][0] == tableau[1][1] && tableau[1][1] == tableau[2][2] && tableau[0][0] != ' ') 
+    {
+        return true;
+    }
 
-	if (tableau[0][2] == tableau[1][1] && tableau[1][1] == tableau[2][0]) 
-	{
-		return true;
-	}
+    if (tableau[0][2] == tableau[1][1] && tableau[1][1] == tableau[2][0] && tableau[0][2] != ' ') 
+    {
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 bool verifier_match_nul() 
@@ -162,54 +162,53 @@ return true;
 // Fonction principale, appelle les autres fonctions
 void jouer() 
 {
-	while (!partie_terminee) 
-	{
-		dessiner_tableau();
-		tour_de_jeu();
-		
-		if (verifier_victoire()) 
-		{
-			dessiner_tableau();
-			cout << "\e[37mLe joueur\e[0m \e[31;1m" << joueur << " \e[0m\e[37ma gagné !\e[0m\n";
-			partie_terminee = true;
-		} else if (verifier_match_nul()) 
-		
-		{
-			dessiner_tableau();
-			cout << "\e[37mMatch nul !\e[0m\n";
-			partie_terminee = true;
-		}
-	}
-	
-	// Gestion de l'option rejouer
-	char choix;
-	
-	cout << "\n\e[37mVoulez-vous rejouer ? (1 pour oui, 0 pour non) : \e[0m";
-	cin >> choix;
+    while (!partie_terminee) 
+    {
+        dessiner_tableau();
+        tour_de_jeu();
+        
+        if (verifier_victoire()) 
+        {
+            dessiner_tableau();
+            cout << "\e[37mLe joueur \e[31;1m" << joueur << "\e[0m\e[37m a perdu !\e[0m\n";
+            partie_terminee = true;
+        } 
+        else if (verifier_match_nul()) 
+        {
+            dessiner_tableau();
+            cout << "\e[37mMatch nul !\e[0m\n";
+            partie_terminee = true;
+        }
+    }
+    
+    // Gestion de l'option rejouer
+    char choix;
+    cout << "\n\e[37mVoulez-vous rejouer ? (1 pour oui, 0 pour non) : \e[0m";
+    cin >> choix;
 
-	if (choix == '1') 
-	{
+    if (choix == '1') 
+    {
 		// Réinitialiser le tableau
-		tableau[0][0] = '1';
-		tableau[0][1] = '2';
-		tableau[0][2] = '3';
-		tableau[1][0] = '4';
-		tableau[1][1] = '5';
-		tableau[1][2] = '6';
-		tableau[2][0] = '7';
-		tableau[2][1] = '8';
-		tableau[2][2] = '9';
-		
-		joueur = 'X';
-		partie_terminee = false;
-		
-		jouer(); // Appel récursif de la fonction jouer() pour relancer une partie
-	} 
-	
-	else 
-	{
-		cout << "\n\e[37mMerci d'avoir joué au Tic Tac Toe ! À bientôt !\e[0m\n" << endl;
-	}
+        tableau[0][0] = '1';
+        tableau[0][1] = '2';
+        tableau[0][2] = '3';
+        tableau[1][0] = '4';
+        tableau[1][1] = '5';
+        tableau[1][2] = '6';
+        tableau[2][0] = '7';
+        tableau[2][1] = '8';
+        tableau[2][2] = '9';
+        
+        joueur = 'X';
+        partie_terminee = false;
+        
+        // Appel récursif de la fonction jouer() pour relancer une partie
+        jouer();
+    } 
+    else 
+    {
+        cout << "\n\e[37mMerci d'avoir joué au Tic Tac Toe ! À bientôt !\e[0m\n" << endl;
+    }
 }
 
 // Appel de la fonction jouer, lance le jeu
